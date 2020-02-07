@@ -11,17 +11,20 @@ body {
   margin: 0;
 }
 
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
+  // padding-left: 0em;
+  // margin-left: 0;
 }
 
 .stage {
-  width: 1020px;
-  height: 510px;
+  // width: 1020px;
+  // height: 510px;
   background-image: url('/img/tile.png');
   position: relative;
 }
@@ -41,6 +44,8 @@ body {
 
   &--wall {
     background-image: url('/img/wall.png');
+    width:85px;
+    height:85px;
   }
 
   &--apple {
@@ -56,9 +61,18 @@ body {
   }
 }
 
+
+// .pacman-container {
+//   position: absolute;
+// }
+
 .pacboy {
+
   &-active-light {
     background-image: url('/img/pacboy-active-light.png');
+    position: absolute;
+    top:0em;
+    left:0em;
   }
 
   &-active-medium {
