@@ -17,18 +17,27 @@ class Pacman {
     }
   }
 
-  move() {
-    
-    // this.position = 
-    // let maxWidth;
-    // let maxHeight;
-    // maxWidth = Stage.width;
-    // maxHeight = Stage.height;
-    // console.log(maxWidth);
-    // console.log(maxHeight);
 
-    // pacboy.style.left = 0 + 'px';
-    // pacboy.style.top = 0 + 'px';
+  resolveInteraction(newPos) {
+    const collisionEntity = this.stage.detectCollision(newPos.x, newPos.y);
+    if (collisionEntity === null) {
+      return newPos;
+    }
+    if(collisionEntity.type === entity_wall) {
+      return this.position;
+    }
+    if(collisionEntity.type === entity_apple) {
+      this.stage.removeEntity(collisionEntity);
+    } else if(collisionEntity.type === entity_bomb) {
+
+    }
+
+  }
+  
+
+
+
+  move() {
 
     document.addEventListener('keydown', (event) => { 
       console.log(this.xpos, this.ypos, this.stage.width, this.stage.height);
@@ -37,6 +46,8 @@ class Pacman {
         this.mouthChange();
 
         if(event.key === 'ArrowRight') {
+            // this.detectCollision(this.xpos, this.ypos);
+
           if (this.xpos < this.stage.width - 85) {
             this.pacboy.style.transform = "scale(1,1)";
             this.xpos = this.xpos + 85;
@@ -66,9 +77,7 @@ class Pacman {
           this.ypos = this.ypos + 85;
           this.pacboy.style.top = this.ypos + 'px';
           }
-        }
-      
-    
+        } 
   });
   
   }

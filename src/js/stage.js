@@ -3,6 +3,9 @@ class Stage {
     let tile_size = 85;
     this.width = width * tile_size;
     this.height = height * tile_size;
+
+
+
   }
 
 
@@ -12,9 +15,32 @@ class Stage {
     this.stage.style.width = this.width + 'px';
     this.stage.style.height = this.height + 'px';
     
-
-    // let stage = this.stage.querySelector('.stage');
   }
+
+
+    addEntity(entity) {
+      entity.mount(this.element);
+      this.entities.push(entity);
+    }
+
+    removeEntity(entity) {
+      const idx = this.entities.indexOf(entity);
+      if (idx > -1) {
+        this.entities.splice(idx,1);
+        entity.unmount();
+      }
+    }
+    
+
+    detectCollision(x,y) {
+      for (const entity of this.entities) {
+        if (entity.xpos === x & entity.ypos === y) {
+         return entity; 
+        } 
+      }
+      return null;
+     }
+  
 
   mount(parent) {
     this.render();
@@ -27,3 +53,7 @@ class Stage {
 }
 
 
+
+
+
+//let stage = this.stage.querySelector('.stage');

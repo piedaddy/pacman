@@ -1,39 +1,44 @@
+const entity_wall = 'wall';
+const entity_apple = 'apple';
+const entity_bomb = 'bomb';
+
+
 class Entity {
-  constructor(x,y, type) {
-    this.x = (x * 85) + 'px';
-    this.y = y;
+  constructor(xpos,ypos, type) {
+    this.xpos = xpos;
+    this.ypos = ypos;
     this.type= type;
-    // this.wall;
-  
   
   }
+
 
 
   render () {
     this.element = document.createElement('div');
     this.element.className = 'entity--wall';
+    this.element.style.left = (this.xpos * 85) + 'px';
+    this.element.style.top = (this.ypos * 85)+ 'px';
+    return this.element;
 
-    let wall = this.element.querySelector('.entity--wall');
-    // wall.style.width = (this.x * 85)+ 'px';
-    // wall.style.height = (this.y * 85)+ 'px';
-    // console.log(wall.style.height);
-      // this.x = (this.x * 85) + 'px';
-      console.log(this.x);
-    wall.style.left = this.x;
 
   }
 
+
+
+
+
+
   mount(parent) {
     this.render();
+    // this.arrayPush();
     parent.appendChild(this.element);
   }
 
 
-
-
-
-
-
+  unmount(){
+    this.element.parentNode.removeChild(this.element);
+    this.element = null;
+  }
 
 
 
@@ -43,3 +48,11 @@ class Entity {
 
 
 }
+
+
+
+   // this.element.style.width = (this.x * 85)+ 'px';
+    // this.element.style.height = (this.y * 85)+ 'px';
+
+    // this.element.style.width = this.x;
+   // this.element.style.height = this.ypos;
