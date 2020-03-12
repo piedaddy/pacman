@@ -1,22 +1,35 @@
 class Stage {
   constructor(width, height){
-    let tile_size = 85;
-    this.width = width * tile_size;
-    this.height = height * tile_size;
-
-
+    this.width = width;
+    this.height = height;
+    this.entities = [];
 
   }
-
 
   render() {
-    this.stage = document.createElement('div');
-    this.stage.className = 'stage';
-    this.stage.style.width = this.width + 'px';
-    this.stage.style.height = this.height + 'px';
-    
+    this.element = document.createElement('div');
+    this.element.className = 'stage';
+    this.element.style.width = `${this.width * TILE_SIZE}px`;
+    this.element.style.height = `${this.height * TILE_SIZE}px`;
+    return this.element;
   }
 
+  mount(parent) {
+    parent.appendChild(this.render());
+
+    fetch(`http://bootcamp.podlomar.org/api/pacman?width=${this.width}&height=${this.height}`)
+      .then(resp => resp.json())
+      .then((pacmanMap) => {
+        this.loadEntitiesFromJson(pacmanMap.walls, ENTITY_WALL);
+        this.loadEntitiesFromJson(pacmanMap.apples, ENTITY_APPLE);
+        this.loadEntitiesFromJson(pacmanMap.bombs, ENTITY_BOMB);
+      });
+  }
+  loadEntitiesFromJson(entitiesJson, type) {
+    for (const ent of entitiesJson) {
+      this.addEntity(new Entity(ent.x, ent.y, type));
+    }
+  }
 
     addEntity(entity) {
       entity.mount(this.element);
@@ -32,6 +45,17 @@ class Stage {
     }
     
 
+  withinBorders(x, y) {
+    if (x >= this.width || y >= this.height) {
+      return false;
+    }
+    if (x < 0 || y < 0) {
+      return false;
+    }
+    return true;
+  }
+
+
     detectCollision(x,y) {
       for (const entity of this.entities) {
         if (entity.xpos === x & entity.ypos === y) {
@@ -42,10 +66,15 @@ class Stage {
      }
   
 
-  mount(parent) {
-    this.render();
-    parent.appendChild(this.stage);
-  }
+  // mount(parent) {
+  //   this.render();
+  //   parent.appendChild(this.stage);
+    
+  // }
+
+
+
+  
 
 
 
