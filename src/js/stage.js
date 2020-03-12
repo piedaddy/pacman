@@ -65,24 +65,4 @@ class Stage {
       return null;
      }
   
-
-  // mount(parent) {
-  //   this.render();
-  //   parent.appendChild(this.stage);
-    
-  // }
-
-
-
-  
-
-
-
-
 }
-
-
-
-
-
-//let stage = this.stage.querySelector('.stage');

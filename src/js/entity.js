@@ -12,8 +12,6 @@ class Entity {
   
   }
 
-
-
   render () {
     const element = document.createElement('div');
     element.className = `entity entity--${this.type}`;
@@ -31,8 +29,6 @@ class Entity {
     this.element.parentNode.removeChild(this.element);
     this.element = null
   }
-
-
 }
 
 
