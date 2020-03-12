@@ -29,7 +29,7 @@ class Entity {
 
 
   mount(parent) {
-    this.render();
+    this.element = this.render();
     // this.arrayPush();
     parent.appendChild(this.element);
   }
